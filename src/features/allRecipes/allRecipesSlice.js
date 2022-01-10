@@ -23,7 +23,16 @@ export const allRecipesReducer = (allRecipes = initialState, action) => {
 }
 
 // Implement the selectors below.
+export const selectAllRecipes = (state) => state.allRecipes;
 
+export const selectFilteredAllRecipes = (state) => {
+  const allRecipes = selectAllRecipes(state);
+  const searchTerm = selectSearchTerm(state);
+
+  return allRecipes.filter((recipe) => 
+    recipe.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+}
 
 // This code is for testing the selectors only.
 const testState = {
