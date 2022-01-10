@@ -1,14 +1,10 @@
-import allRecipesData from '../../../data.js'
+import allRecipesData from '../../data.js'
 import { selectSearchTerm } from '../searchTerm/searchTermSlice.js';
 
-export const loadData = () => {
-  return {
-    type: 'allRecipes/loadData',
-    payload: allRecipesData
-  }
-}
-
+// INITIALIZE STATE
 const initialState = [];
+
+// REDUCER FUNCTIONS
 export const allRecipesReducer = (allRecipes = initialState, action) => {
   switch (action.type) {
     case 'allRecipes/loadData':
@@ -22,7 +18,16 @@ export const allRecipesReducer = (allRecipes = initialState, action) => {
   }
 }
 
-// Implement the selectors below.
+// ACTION FUNCTIONS
+export const loadData = () => {
+  return {
+    type: 'allRecipes/loadData',
+    payload: allRecipesData
+  }
+}
+
+
+// IMPLEMENT SELECTORS
 export const selectAllRecipes = (state) => state.allRecipes;
 
 export const selectFilteredAllRecipes = (state) => {

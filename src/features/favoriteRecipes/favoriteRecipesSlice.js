@@ -1,6 +1,10 @@
 import { selectSearchTerm } from '../searchTerm/searchTermSlice.js';
 
+// INITIALIZE STATE
 const initialState = [];
+
+// REDUCER FUNCTIONS
+
 export const favoriteRecipesReducer = (favoriteRecipes = initialState, action) => {
   switch (action.type) {
     case 'favoriteRecipes/addRecipe':
@@ -12,13 +16,13 @@ export const favoriteRecipesReducer = (favoriteRecipes = initialState, action) =
   }
 }
 
+// ACTION FUNCTIONS
 export function addRecipe(recipe) {
   return {
     type: 'favoriteRecipes/addRecipe',
     payload: recipe
   }
 }
-
 export function removeRecipe(recipe) {
   return {
     type: 'favoriteRecipes/removeRecipe',
@@ -26,6 +30,7 @@ export function removeRecipe(recipe) {
   }
 }
 
+// IMPLEMENT SELECTORS
 export const selectFavoriteRecipes = (state) => state.favoriteRecipes;
 
 export const selectFilteredFavoriteRecipes = (state) => {

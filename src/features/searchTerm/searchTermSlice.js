@@ -1,5 +1,8 @@
+
+// INITIALIZE STATE
 const initialState = ''
 
+// REDUCER FUNCTIONS
 export const searchTermReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'searchTerm/setSearchTerm':
@@ -11,17 +14,18 @@ export const searchTermReducer = (state = initialState, action) => {
   }
 }
 
+//ACTION FUNCTIONS
 export function setSearchTerm(term) {
   return {
     type: 'searchTerm/setSearchTerm',
     payload: term
   }
 }
-
 export function clearSearchTerm() {
   return {
     type: 'searchTerm/clearSearchTerm'
   }
 }
 
+// IMPLEMENT SELECTORS
 export const selectSearchTerm = (state) => state.searchTerm;

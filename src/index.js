@@ -11,7 +11,7 @@ const render = () => {
   // Pass `state` and `dispatch` props to <App />
   ReactDOM.render(
   <Provider store={store}>
-    <App/>
+    <App />
   </Provider>,
     document.getElementById('root')
   )
