@@ -1,4 +1,5 @@
-import allRecipesData from '../../data.js'
+import allRecipesData from '../../../data.js'
+import { selectSearchTerm } from '../searchTerm/searchTermSlice.js';
 
 export const loadData = () => {
   return {
@@ -20,3 +21,26 @@ export const allRecipesReducer = (allRecipes = initialState, action) => {
       return allRecipes;
   }
 }
+
+// Implement the selectors below.
+
+
+// This code is for testing the selectors only.
+const testState = {
+  allRecipes: allRecipesData,
+  searchTerm: 'ch'
+}
+
+const testSelectAllRecipes = () => {
+  console.log('All Recipes')
+  console.log(selectAllRecipes(testState));
+}
+
+const testSelectFilteredAllRecipes = () => {
+  console.log('\nRecipes filtered by searchTerm')
+  console.log(selectFilteredAllRecipes(testState));
+}
+
+// Uncomment these to test each selector.
+// testSelectAllRecipes();
+// testSelectFilteredAllRecipes(); 
