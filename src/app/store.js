@@ -1,4 +1,5 @@
 import { createStore, combineReducers } from 'redux';
+// Slice Reducers
 import { favoriteRecipesReducer } from '../features/favoriteRecipes/favoriteRecipesSlice.js';
 import { searchTermReducer } from '../features/searchTerm/searchTermSlice.js';
 import { allRecipesReducer } from '../features/allRecipes/allRecipesSlice.js';

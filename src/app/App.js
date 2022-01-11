@@ -1,5 +1,6 @@
 import React from 'react';
 
+// COMPONENTS
 import { AllRecipes } from '../features/allRecipes/AllRecipes.js';
 import { SearchTerm } from '../features/searchTerm/SearchTerm.js';
 import { FavoriteRecipes } from '../features/favoriteRecipes/FavoriteRecipes'

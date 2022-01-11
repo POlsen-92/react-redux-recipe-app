@@ -27,7 +27,7 @@ export const loadData = () => {
 }
 
 
-// IMPLEMENT SELECTORS
+// SELECTORS
 export const selectAllRecipes = (state) => state.allRecipes;
 
 export const selectFilteredAllRecipes = (state) => {
