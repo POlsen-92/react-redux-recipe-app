@@ -1,31 +1,23 @@
 import allRecipesData from '../../data.js'
+import { createSlice } from '@reduxjs/toolkit';
 import { selectSearchTerm } from '../searchTerm/searchTermSlice.js';
 
-// INITIALIZE STATE
-const initialState = [];
-
-// REDUCER FUNCTIONS
-export const allRecipesReducer = (allRecipes = initialState, action) => {
-  switch (action.type) {
-    case 'allRecipes/loadData':
-      return action.payload;
-    case 'favoriteRecipes/addRecipe':
-      return allRecipes.filter(recipe => recipe.id !== action.payload.id);
-    case 'favoriteRecipes/removeRecipe':
-      return [...allRecipes, action.payload]
-    default:
-      return allRecipes;
+// CREATING SLICE OBJECT
+export const allRecipesSlice = createSlice({
+  name: "allRecipes",
+  initialState: [],
+  reducers: {
+    loadData: (state, action) => {
+      return allRecipesData
+    }, 
+    addRecipe: (state, action) => {
+      state.push(action.payload);
+    }, 
+    removeRecipe: (state, action) => {
+      return state.filter(recipe => recipe.id !== action.payload.id)
+    }
   }
-}
-
-// ACTION FUNCTIONS
-export const loadData = () => {
-  return {
-    type: 'allRecipes/loadData',
-    payload: allRecipesData
-  }
-}
-
+})
 
 // SELECTORS
 export const selectAllRecipes = (state) => state.allRecipes;
@@ -39,22 +31,8 @@ export const selectFilteredAllRecipes = (state) => {
   );
 }
 
-// This code is for testing the selectors only.
-const testState = {
-  allRecipes: allRecipesData,
-  searchTerm: 'ch'
-}
+// EXPORTING SLICE ACTIONS FROM SLICE OBJECT
+export const { addRecipe, removeRecipe, loadData } = allRecipesSlice.actions;
 
-const testSelectAllRecipes = () => {
-  console.log('All Recipes')
-  console.log(selectAllRecipes(testState));
-}
-
-const testSelectFilteredAllRecipes = () => {
-  console.log('\nRecipes filtered by searchTerm')
-  console.log(selectFilteredAllRecipes(testState));
-}
-
-// Uncomment these to test each selector.
-// testSelectAllRecipes();
-// testSelectFilteredAllRecipes(); 
+// EXPORTING SLICE REDUCER FROM SLICE OBJECT
+export default allRecipesSlice.reducer;
