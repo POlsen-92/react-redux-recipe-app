@@ -1,21 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./app/App";
+import store from "./app/store";
+import { Provider } from "react-redux";
 
-import { App } from './app/App.js';
-// Import 'store' here.
-import store from './app/store.js';
+const { worker } = require("./mocks/browser");
+worker.start();
 
-
-const render = () => {
-  // Pass `state` and `dispatch` props to <App />
-  ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-    document.getElementById('root')
-  )
-}
-render();
-// Subscribe render to changes to the `store`
-store.subscribe(render)
+ReactDOM.render(
+  <React.StrictMode>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </React.StrictMode>,
+  document.getElementById("root")
+);

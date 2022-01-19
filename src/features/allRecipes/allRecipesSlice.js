@@ -1,26 +1,57 @@
-import allRecipesData from '../../data.js'
-import { createSlice } from '@reduxjs/toolkit';
-import { selectSearchTerm } from '../searchTerm/searchTermSlice.js';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { selectSearchTerm } from '../search/searchSlice.js';
+
+import {
+  addFavoriteRecipe,
+  removeFavoriteRecipe,
+} from "../favoriteRecipes/favoriteRecipesSlice";
+
+// MIDDLEWARE
+export const loadRecipes = createAsyncThunk(
+  "allRecipes/loadRecipes",
+  async () => {
+    const data = await fetch("api/recipes?limit=10");
+    const json = await data.json();
+    return json;
+  }
+);
+ 
 
 // CREATING SLICE OBJECT
 export const allRecipesSlice = createSlice({
   name: "allRecipes",
-  initialState: [],
+  initialState: {
+    recipes: [],
+    isLoading: false,
+    hasError: false
+  },
   reducers: {
-    loadData: (state, action) => {
-      return allRecipesData
-    }, 
-    addRecipe: (state, action) => {
+    addAllRecipe: (state, action) => {
       state.push(action.payload);
     }, 
-    removeRecipe: (state, action) => {
+    removeAllRecipe: (state, action) => {
       return state.filter(recipe => recipe.id !== action.payload.id)
     }
+  }, 
+  extraReducers: {
+    [loadRecipes.pending]: (state, action) => {
+      state.isLoading = true;
+      state.hasError = false;
+    },
+    [loadRecipes.fulfilled]: (state, action) => {
+      state.recipes = action.payload;
+      state.isLoading = false;
+      state.hasError = false;
+    },
+    [loadRecipes.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.hasError = true;
+    },
   }
 })
 
 // SELECTORS
-export const selectAllRecipes = (state) => state.allRecipes;
+export const selectAllRecipes = (state) => state.allRecipes.recipes;
 
 export const selectFilteredAllRecipes = (state) => {
   const allRecipes = selectAllRecipes(state);
@@ -32,7 +63,7 @@ export const selectFilteredAllRecipes = (state) => {
 }
 
 // EXPORTING SLICE ACTIONS FROM SLICE OBJECT
-export const { addRecipe, removeRecipe, loadData } = allRecipesSlice.actions;
+export const { addAllRecipe, removeAllRecipe } = allRecipesSlice.actions;
 
 // EXPORTING SLICE REDUCER FROM SLICE OBJECT
 export default allRecipesSlice.reducer;
