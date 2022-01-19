@@ -1,11 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { selectSearchTerm } from '../search/searchSlice.js';
 
-import {
-  addFavoriteRecipe,
-  removeFavoriteRecipe,
-} from "../favoriteRecipes/favoriteRecipesSlice";
-
 // MIDDLEWARE
 export const loadRecipes = createAsyncThunk(
   "allRecipes/loadRecipes",
